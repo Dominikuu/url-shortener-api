@@ -10,6 +10,7 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 const auth = require('./controllers/authorization');
+const tinyUrl = require('./controllers/tinyUrl')
 
 //Database Setup
 const db = knex({
@@ -19,14 +20,16 @@ const db = knex({
 
 const app = express();
 
-const whitelist = ['http://localhost:3001']
+const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+    console.log('origin=>>>>',origin)
+    callback(null, true)
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true)
+    // } else {
+    //   callback(new Error('Not allowed by CORS'))
+    // }
   }
 }
 
@@ -40,6 +43,9 @@ app.get('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileG
 app.post('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileUpdate(req, res, db)})
 app.put('/image', auth.requireAuth, (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res)})
+app.get('/shortenurl/:url', async (req, res) => {tinyUrl.handleUrlRedirect(req, res, db)})
+// app.post('/shortenurl', auth.requireAuth, (req, res) => {tinyUrl.handleUrlShorten(req, res)})
+app.post('/shortenurl', async(req, res) => {tinyUrl.handleUrlShorten(req, res, db)})
 
 app.listen(3000, ()=> {
   console.log('app is running on port 3000');

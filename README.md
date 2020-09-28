@@ -1,5 +1,4 @@
-# SmartBrain-api - Dockerized
-Final project for Udemy course - using Docker
+# UrlShortener-api - Dockerized
 
 1. Clone this repo
 2. run `npm install`
