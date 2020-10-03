@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+    - docker
+
+before_install:
+    - docker build -t dominikuu/url-shortener-api .
+
+script:
+    - docker run dominikuu/url-shortener-api npm test
+
+after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
+
+    - docker push dominikuu/url-shortener-api
