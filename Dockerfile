@@ -1,7 +1,7 @@
 FROM node:8.11.1
 
 # Create app directory
-RUN mkdir -p /usr/src/smart-brain-api
+RUN mkdir -p /usr/src/url-shortener-api
 WORKDIR /usr/src/url-shortener-api
 
 # Install app dependencies
