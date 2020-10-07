@@ -57,12 +57,12 @@
                     "hostPort": 6379
                 }
             ],
-            "memory": 50
+            "memory": 100
         },
         {
             "command": [
                 "npm",
-                "build"
+                "start"
             ],
             "environment": [
                 {
@@ -74,11 +74,11 @@
                     "value": "redis://redis:6379"
                 }
             ],
-            "essential": true,
+            "essential": false,
             "mountPoints": [
                 {
                     "containerPath": "/usr/src/url-shortener-api",
-                    "sourceVolume": "_"
+                    "sourceVolume": "url-shortener-api"
                 }
             ],
             "name": "url-shortener-api",
