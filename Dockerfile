@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/url-shortener-api
 WORKDIR /usr/src/url-shortener-api
 
 # Install app dependencies
-# COPY ./package.json /usr/src/url-shortener-api
+COPY ./package.json /usr/src/url-shortener-api
 RUN npm install
 
 # Bundle app source
@@ -16,5 +16,3 @@ ARG NODE_VERSION=8.11.1
 
 # Environment
 ENV NODE_VERSION $NODE_VERSION
-
-EXPOSE 3000

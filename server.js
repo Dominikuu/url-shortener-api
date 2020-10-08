@@ -19,6 +19,7 @@ const db = knex({
 });
 
 const app = express();
+const port = process.env.PORT || 3000
 
 const whitelist = ['http://localhost:3000']
 const corsOptions = {
@@ -51,6 +52,6 @@ app.get('/shortenurl/:url', async (req, res) => {tinyUrl.handleUrlRedirect(req, 
 // app.post('/shortenurl', auth.requireAuth, (req, res) => {tinyUrl.handleUrlShorten(req, res)})
 app.post('/shortenurl', async(req, res) => {tinyUrl.handleUrlShorten(req, res, db)})
 
-app.listen(3000, ()=> {
+app.listen(port, ()=> {
   console.log('app is running on port 3000');
 })

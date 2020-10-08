@@ -11,7 +11,12 @@
                     "hostPort": 80
                 }
             ],
-            "memory": 100
+            "memory": 100,
+            "command": [
+                "tail",
+                "-f",
+                "/bin/bash"
+              ]
         },
         {
             "environment": [
@@ -45,7 +50,12 @@
                     "hostPort": 5432
                 }
             ],
-            "memory": 100
+            "memory": 100,
+            "command": [
+                "tail",
+                "-f",
+                "/bin/bash"
+              ]
         },
         {
             "essential": false,
@@ -57,7 +67,12 @@
                     "hostPort": 6379
                 }
             ],
-            "memory": 100
+            "memory": 100,
+            "command": [
+                "tail",
+                "-f",
+                "/bin/bash"
+              ]
         },
         {
             "command": [
@@ -74,7 +89,7 @@
                     "value": "redis://redis:6379"
                 }
             ],
-            "essential": false,
+            "essential": true,
             "mountPoints": [
                 {
                     "containerPath": "/usr/src/url-shortener-api",
@@ -83,6 +98,7 @@
             ],
             "name": "url-shortener-api",
             "image": "dominikuu/url-shortener-api",
+            "links": ["redis", "postgres"],
             "portMappings": [
                 {
                     "containerPort": 3000,
