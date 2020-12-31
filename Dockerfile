@@ -1,4 +1,4 @@
-FROM node:8.11.1
+FROM node:10.13.0
 
 # Create app directory
 RUN mkdir -p /usr/src/url-shortener-api
@@ -12,7 +12,7 @@ RUN npm install
 COPY . /usr/src/url-shortener-api
 
 # Build arguments
-ARG NODE_VERSION=8.11.1
+ARG NODE_VERSION=10.13.0
 
 # Environment
 ENV NODE_VERSION $NODE_VERSION

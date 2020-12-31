@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
 const knex = require('knex');
 const morgan = require('morgan');
@@ -24,7 +24,7 @@ const port = process.env.PORT || 3000
 const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log('origin=>>>>',origin)
+    console.log('origin=>>>>', origin)
     callback(null, true)
     // if (whitelist.indexOf(origin) !== -1) {
     //   callback(null, true)
@@ -44,14 +44,14 @@ app.get('/', (req, res) => {
 
 app.post('/signin', signin.signinAuthentication(db, bcrypt))
 app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcrypt) })
-app.get('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileGet(req, res, db)})
-app.post('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileUpdate(req, res, db)})
-app.put('/image', auth.requireAuth, (req, res) => { image.handleImage(req, res, db)})
-app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res)})
-app.get('/shortenurl/:url', async (req, res) => {tinyUrl.handleUrlRedirect(req, res, db)})
+app.get('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileGet(req, res, db) })
+app.post('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileUpdate(req, res, db) })
+app.put('/image', auth.requireAuth, (req, res) => { image.handleImage(req, res, db) })
+app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res) })
+app.get('/shortenurl/:url', async (req, res) => { tinyUrl.handleUrlRedirect(req, res, db) })
 // app.post('/shortenurl', auth.requireAuth, (req, res) => {tinyUrl.handleUrlShorten(req, res)})
-app.post('/shortenurl', async(req, res) => {tinyUrl.handleUrlShorten(req, res, db)})
+app.post('/shortenurl', async (req, res) => { tinyUrl.handleUrlShorten(req, res, db) })
 
-app.listen(port, ()=> {
+app.listen(port, () => {
   console.log('app is running on port 3000');
 })
