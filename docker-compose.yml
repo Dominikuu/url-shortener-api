@@ -1,11 +1,11 @@
-version: '3.6'
+version: "3.6"
 services:
   # Nginx
   nginx:
     container_name: nginx
     build: nginx
     ports:
-        - "80:80"
+      - "80:80"
   # PostgreSQL
   postgres:
     container_name: postgres
