@@ -4,6 +4,8 @@ services:
   nginx:
     container_name: nginx
     build: nginx
+    environment:
+      SERVER_IP: 'localhost:3000'
     ports:
       - "80:80"
   # PostgreSQL
@@ -28,8 +30,6 @@ services:
 
   # Backend
   url-shortener-api:
-    # env_file:
-    #   - ./.private/api-keys.env "Another way to insert env variables"
     container_name: backend
     build: ./
     volumes:
@@ -41,7 +41,4 @@ services:
     environment:
       POSTGRES_URI: postgres://admin:password@postgres:5432/url-shortener
       REDIS_URI: redis://redis:6379
-    # Heads up! Docker has updated this feature and now you don't need to define the links property in order for things to work - https://docs.docker.com/compose/networking/
-    # links:
-    #   - postgres
-    #   - redis
+
